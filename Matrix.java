@@ -1,6 +1,7 @@
 public class Matrix {
 
   private static final int DEFAULT_SIZE = 10;
+  private static final double DOUBLE_TOLERANCE = 0.0000001;
   private int rowInterchanges;
   private int size;
   private int dim;
@@ -174,13 +175,45 @@ public class Matrix {
   }
 
   public void reducedEchelonForm() {
+    Matrix echMatrix = echelonForm();
 
+    int rowPosition = 0;
 
+    for(int col = 0; col < echMatrix.multArr[0].size; col++) {
+      double pivot = echMatrix.multArr[rowPosition].arr[col];
+      if(compareDoubs(pivot, 1.0)) {
+        rowPosition++;
+      }
+      else if(!compareDoubs(pivot, 0)) {
+        reducedEchelonOps(echMatrix, rowPosition, col);
+        rowPosition++;
+      }
+    }
+  }
+
+  /* zeroes out values above and below current pivot in column*/
+  private void reducedEchelonOps(Matrix mat, int row, int col) {
+    double pivot = mat.multArr[row].arr[col];
+    for(int i = 0; i < mat.size; i++) {
+      if(i != row) {
+        double next = mat.multArr[i].arr[col];
+        double mult = -1 * next / pivot;
+
+        rowSum(mat, i, rowMultiple(mat, row, mult));
+      }
+    }
+  }
+
+  public boolean compareDoubs(double a, double b) {
+    if(Math.abs(a-b) < DOUBLE_TOLERANCE) {
+      return true;
+    }
+    return false;
   }
 
   public Matrix echelonForm() {
     if( dim > 2 ) {
-      System.out.println("Can't find echelon form");
+      System.out.println("Can't find (row reduced)echelon form");
       return null;
     }
 
@@ -195,9 +228,7 @@ public class Matrix {
     for(int col = 0; col < echMatrix.multArr[0].size; col++) {
       double [] column = new double[echMatrix.size-rowPosition];
       for(int row = rowPosition; row < echMatrix.size; row++) {
-        column[row-rowPosition] = 0;
-        double temp = echMatrix.multArr[row].arr[col];
-        column[row-rowPosition] = temp;
+        column[row-rowPosition] = echMatrix.multArr[row].arr[col];
       }
 
       double max = column[0];
