@@ -1,4 +1,5 @@
 public class Test {
+  // fake comment commit git config check
 
   public static void main(String [] args) {
     int a = 0;
