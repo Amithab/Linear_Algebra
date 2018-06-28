@@ -1,4 +1,4 @@
-public class Test {
+public class TestMatrix {
   // fake comment commit git config check
 
   public static void main(String [] args) {

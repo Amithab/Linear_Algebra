@@ -146,6 +146,42 @@ public class Matrix {
     }*/
   }
 
+  public Matrix matrixMultiply(Matrix b) {
+    
+    if(this.dim > 2 || b.dim > 2) {
+      System.out.printf("Dimensions for matrices are too high");
+      return null;
+    }
+
+    if(this.dim == 1) {
+
+      if(b.dim == 1) {
+        if(this.size != 1 || b.size != 1) {
+          System.out.printf("Incompatible dimensions between matrices");
+          return null;
+        }
+        Matrix result = new Matrix(1);
+        result.setValue(new int[]{0}, this.arr[0]*b.arr[0]);
+        return result;
+      }
+      else {
+        if(this.size != b.size) {
+          System.out.println("Incompatible dimensions between matrices 1d" + 
+                              " and 2d");
+          return null;
+        }
+
+
+        // continue code on this line
+
+      }
+    }
+
+    
+
+
+  }
+
   public double getDeterminant() {
     if(dim == 1) {
       if(size == 1) {
