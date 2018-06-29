@@ -155,26 +155,45 @@ public class Matrix {
 
     if(this.dim == 1) {
 
+      /* 1xN matrix times NxM matrix */
       if(b.dim == 1) {
         if(this.size != 1 || b.size != 1) {
           System.out.printf("Incompatible dimensions between matrices");
           return null;
         }
+        /* 1x1 matrix multiplied by a 1x1 matrix */
         Matrix result = new Matrix(1);
         result.setValue(new int[]{0}, this.arr[0]*b.arr[0]);
         return result;
       }
-      else {
-        if(this.size != b.size) {
-          System.out.println("Incompatible dimensions between matrices 1d" + 
-                              " and 2d");
-          return null;
+      
+      if(this.size != b.size) {
+        System.out.println("Incompatible dimensions between matrices 1d" + 
+                            " and 2d");
+        return null;
+      }
+
+      // M = b.cols
+
+      int m = b.multArr[0].size;
+
+      Matrix result = new Matrix(m);
+
+      for(int col = 0; col < b.multArr[0].size; col++) {
+        double sum = 0.0;
+        for(int row = 0; row < b.size; row++) {
+          sum += this.arr[row] * b.multArr[col].arr[row];
         }
+        result.setValue(new int[]{col}, sum);
+
+      }
+
+      return result;
 
 
         // continue code on this line
 
-      }
+      
     }
 
     
