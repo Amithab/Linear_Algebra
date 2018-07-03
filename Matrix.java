@@ -196,6 +196,46 @@ public class Matrix {
       
     }
 
+    if(b.dim == 1) {
+      if(this.size != 1) {
+        System.out.println("Incompatible dimensions between 2d and 1d" + 
+                            "  matrices");
+        return null;
+      }
+
+      /* Nx1 matrix multiplied by 1xM matrix */
+      Matrix result = new Matrix(new int[] {this.size, b.size}, 2);
+
+      for(int col = 0; col < b.size; col++) {
+        for(int row = 0; row < this.multArr[0].size; row++) {
+          result.setValue(new int[] {row, col}, 
+                           this.multArr[row].arr[0]*b.arr[col]);
+        }
+      }
+
+      return result;
+    }
+
+    /* NxM matrix multiplied by a MxQ matrix */
+    if(this.multArr[0].size != b.size) {
+      System.out.println("Incompatible dimensions between 2d and 2d matrices");
+      return null;
+    }
+
+    Matrix result = new Matrix(new int[] {this.size, b.multArr[0].size}, 2);
+
+    for(int col = 0; col < b.multArr[0].size; col++) {
+      for(int rowB = 0; rowB < this.size; rowB++) {
+        double sum = 0.0;
+        for(int rowP = 0; rowP < b.size; rowP++) {
+          sum+= this.multArr[rowB].arr[rowP]*b.multArr[rowP].arr[col];
+        }
+
+        result.setValue(new int[]{rowB, col}, sum);
+      }
+    }
+    return result;
+
     
 
 
