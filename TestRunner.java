@@ -8,6 +8,8 @@ public class TestRunner {
       for (Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }
-      System.out.println("Result=="+result.wasSuccessful());
+      System.out.println("TestJUnit Result=="+result.wasSuccessful());
+
+      //result = JUnitCore.runClasses(CheckMatrix.class)
    }
 } 

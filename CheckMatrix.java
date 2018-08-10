@@ -1,12 +1,38 @@
-public class TestMatrix {
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+public class CheckMatrix {
   // fake comment commit git config check
 
-  public static void main(String [] args) {
+  @Test
+  public void firstTest() {
+    // Testing: [ [1, 2], [3, 4] ]
+    Matrix mat = new Matrix(2, 2, 2);
+    mat.printMatrix();
+
+    mat.setValue(new int[]{0, 0}, 1);
+    mat.setValue(new int[]{0, 1}, 2);
+    mat.setValue(new int[]{1, 0}, 3);
+    mat.setValue(new int[]{1, 1}, 4);
+    mat.printMatrix();
+
+    assertEquals(1, (int)mat.getValue(new int[]{0, 0}));
+    assertEquals(2, (int)mat.getValue(new int[]{0, 1}));
+    assertEquals(3, (int)mat.getValue(new int[]{1, 0}));
+    assertEquals(4, (int)mat.getValue(new int[]{1, 1}));
+  }
+
+
+
+
+
+
+
+
+  /*public static void main(String [] args) {
     int a = 0;
     System.out.println("hello " + a + " hi\n");
 
     Matrix mat = new Matrix(3, 4, 4);
-//    mat.printMatrix();
     Matrix echMat = mat.echelonForm();
     if(echMat != null) {
       echMat.printMatrix();
@@ -81,15 +107,7 @@ public class TestMatrix {
     if(echMat != null) {
       echMat.printMatrix();
     }
-
-
-
-    /*Matrix mat2 = new Matrix(4, 2, 2);
-    mat2.printMatrix();
-
-    Matrix mat3 = new Matrix(4, 3, 3);
-    mat3.printMatrix();*/
-  }
+  }*/
 
 }
   

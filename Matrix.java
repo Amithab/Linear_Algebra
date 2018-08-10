@@ -92,7 +92,7 @@ public class Matrix {
     }
   }
 
-  public void printArr() {
+  private void printArr() {
     System.out.print("[\t");
     for(int i = 0; i < arr.length; i++) {
       System.out.print(arr[i] + "\t");

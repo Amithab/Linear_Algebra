@@ -2,10 +2,11 @@ JAVA_SRCS	= Matrix.java
 
 JAVA_CLASSES	= Matrix.class
 
-JUNIT_SRCS	= TestRunner.java TestJUnit.java
+JUNIT_SRCS	= CheckMatrix.java #TestJUnit.java #TestRunner.java
 JUNIT_CLASSES	= TestRunner.class TestJUnit.class
 
 JAVAC		= javac
+JAVA		= java
 
 JAVA_FLAGS	= -x
 JUNIT_FLAGS	= -cp .:/usr/share/java/junit4.jar
@@ -27,8 +28,13 @@ clean:
 	@echo "Clean."
 
 testJUnit:
-	@echo "Compiling TestRunner.java"
+	@echo "Compiling CheckMatrix"
 	$(JAVAC) $(JUNIT_FLAGS) $(JUNIT_SRCS)
+	@echo "Done"
+
+runJUnit:
+	@echo "Running CheckMatrix"
+	$(JAVA) $(JUNIT_FLAGS) org.junit.runner.JUnitCore CheckMatrix
 	@echo "Done"
 
 new:
