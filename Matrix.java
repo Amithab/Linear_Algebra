@@ -1,3 +1,22 @@
+/**
+ * Accessor/Getter methods:
+ * int getSize();
+ * void setSize(int size);
+ * double findMin();
+ * double findMax();
+ * void setValue(int [] coor, double value);
+ * double getValue(int [] coor);
+ * void printArr();
+ * int getMaxDim();
+ * int getDim();
+ *
+ * Constructors:
+ * Matrix(Matrix copy); deep copy
+ * Matrix(int size, int dim, int maxDim); NxN...xN set to 0 
+ * Matrix(int [] sizes, int maxDim);
+ * Matrix(int size);
+ * Matrix();
+ */
 public class Matrix {
 
   private static final int DEFAULT_SIZE = 10;
@@ -7,7 +26,7 @@ public class Matrix {
   private int dim;
   private int maxDim;
   private double [] arr;
-  private Matrix [] multArr = null;
+  Matrix [] multArr = null;
 
   /* 1xDEFAULT_SIZE Matrix generator all set to 0 */
   public Matrix() {
@@ -523,5 +542,13 @@ public class Matrix {
 
   public void setSize(int size) {
     this.size = size;
+  }
+
+  public int getMaxDim() {
+    return this.maxDim;
+  }
+
+  public int getDim() {
+    return this.dim;
   }
 }

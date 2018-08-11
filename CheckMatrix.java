@@ -1,7 +1,10 @@
+import java.util.Random;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 public class CheckMatrix {
   // fake comment commit git config check
+
+  private static final double epsilon = 0.0000001;
 
   @Test
   public void firstTest() {
@@ -20,6 +23,68 @@ public class CheckMatrix {
     assertEquals(3, (int)mat.getValue(new int[]{1, 0}));
     assertEquals(4, (int)mat.getValue(new int[]{1, 1}));
   }
+
+  @Test
+  public void testDefaultConstructor() {
+    Matrix mat = new Matrix();
+    assertEquals(10, mat.getSize());
+    assertEquals(0, mat.findMin(), epsilon);
+    assertEquals(0, mat.findMax(), epsilon);
+    assertEquals(1, mat.getMaxDim());
+    assertNull(mat.multArr);
+    int numTestCases = 10;
+    Random rand = new Random();
+    int min = rand.nextInt(10*numTestCases) + 1;
+    int max = rand.nextInt(10*numTestCases) + min + 1;
+    for(int i = 0; i < numTestCases; i++) {
+      int [] randArr = randomArr(10, min, max);
+      for(int j = 0; j < randArr.length; j++) {
+        mat.setValue(new int[]{j}, randArr[j]);
+      }
+      for(int j = 0; j < randArr.length; j++) {
+        assertEquals( randArr[j], mat.getValue(new int[]{j}), epsilon);
+      }
+      assertTrue( min <= mat.findMin() && mat.findMax() <= max);
+    }
+  }
+
+  @Test
+  public void checkSizeConstructor() {
+    int size = 20;
+    Matrix mat = new Matrix(size);
+
+    assertEquals(size, mat.getSize());
+    assertEquals(0, mat.findMin(), epsilon);
+    assertEquals(0, mat.findMax(), epsilon);
+    assertEquals(1, mat.getMaxDim());
+    assertNull(mat.multArr);
+    int numTestCases = 10;
+    Random rand = new Random();
+    int min = rand.nextInt(10*numTestCases) + 1;
+    int max = rand.nextInt(10*numTestCases) + min + 1;
+    for(int i = 0; i < numTestCases; i++) {
+      int [] randArr = randomArr(size, min, max);
+      for(int j = 0; j < randArr.length; j++) {
+        mat.setValue(new int[]{j}, randArr[j]);
+      }
+      for(int j = 0; j < randArr.length; j++) {
+        assertEquals( randArr[j], mat.getValue(new int[]{j}), epsilon);
+      }
+      assertTrue( min <= mat.findMin() && mat.findMax() <= max);
+    }
+  }
+
+
+  public int[] randomArr(int size, int min, int max) {
+    Random rand = new Random();
+    int [] randArr = new int[size];
+    for(int i = 0; i < size; i++) {
+      randArr[i] = rand.nextInt(max-min+1) + min;
+    }
+    return randArr;
+  }
+
+
 
 
 
