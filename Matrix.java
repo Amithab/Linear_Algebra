@@ -1,4 +1,4 @@
-/**
+/**you suck
  * Accessor/Getter methods:
  * int getSize();
  * void setSize(int size);
